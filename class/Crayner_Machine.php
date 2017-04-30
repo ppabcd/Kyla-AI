@@ -1,4 +1,6 @@
 <?php
+namespace Crayner_Machine;
+
 date_default_timezone_set("Asia/Jakarta");
 /**
 * @author Ammar F. https://www.facebook.com/ammarfaizi2 <ammarfaizi2@gmail.com>
@@ -117,7 +119,7 @@ class Crayner_Machine{
 			"mem_usg"=>$ram,
 			""=>$ecx
 			);
-		endif; 
+		endif;
 		return false;
 	}
 }

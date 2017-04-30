@@ -2,6 +2,7 @@
 /**
  * Wikipedia Class
  */
+
 class Wikipedia
 {
    private function child_result($data){

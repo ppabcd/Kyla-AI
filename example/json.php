@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require_once("../class/AI.php");
+require_once("../class/autoload.php");
 $ai = new AI;
 if(isset($_GET['chat'])){
    echo $ai->list_chat();

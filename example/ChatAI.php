@@ -223,7 +223,7 @@
       //responsiveVoice.speak("Welcome to kayla chat.","US English Female",{pitch: 0,rate:0.7,volume:1});
       //responsiveVoice.speak("Dzięki za wszystko","Polish Female",{pitch: 0,rate:0.7,volume:1});
       function speak(data){
-         responsiveVoice.speak(data,"US English Female",{rate:0.7});
+         responsiveVoice.speak(data,"US English Female",{rate:1});
       }
       function scroll(){
          $("#chat-history").scrollTop($("#chat-history")[0].scrollHeight);

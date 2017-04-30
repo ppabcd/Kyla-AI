@@ -1,8 +1,5 @@
 <?php
-/**
-* @author Reza J. https://www.facebook.com/ppabcd <rezajuliandri20@gmail.com>
-* @license Kyla AI (c) 2017
-*/
+/*
 require_once("./class/AI.php");
 require_once("./class/SaferScript.php");
 require_once("./class/Wikipedia.php");
@@ -10,6 +7,8 @@ require_once("./class/Weather.php");
 /**
  * Command Class
  */
+
+
 class Command
 {
    private $ai;
@@ -105,6 +104,7 @@ class Command
       $error = $ls->parse();
       $return = $ls->execute();
       $ai->add_chat("Hasil dari {$data} adalah {$return}",2);
+      $data = str_replace("+"," plus ",$data);
       $translate = $this->translate(" ".str_replace(" ","+","Hasil dari {$data} adalah {$return}"),1);
       return "0 | 2 | ".$translate;
    }
@@ -312,7 +312,12 @@ class Command
       $judul = $wiki_data['title'];
       $content = $wiki_data['extract'];
       $ai->add_chat("Wikipedia Result {$query} :<br>".$judul.'<br>'.$content,2);
-      return true;
+      $chat = "Wikipedia Result {$query} :<br>".$judul.'<br>'.$content;
+      $chat_en = str_replace(" ","+",$chat);
+      $chat_en = str_replace("<br>","+.+",$chat_en);
+      $translate = $this->translate(" ".urlencode($chat_en),1);
+      $chat_en = str_replace("+","",$translate);
+      return "0 | 2 | ".$chat_en;
 
    }
    public function cuaca($query){
@@ -328,7 +333,10 @@ class Command
       }
       if($weather->execute($query)){
          $ai->add_chat("Data Cuaca ".$weather->execute($query),2);
-         return true;
+         $chat_en = str_replace(" ","+","Data Cuaca ".$weather->execute($query));
+         $chat_en = str_replace("<br>","+.+",$chat_en);
+         $translate = $this->translate(" ".$chat_en,1);
+         return "0 | 2 | ".$translate;
       }
       else {
          return false;
@@ -345,7 +353,9 @@ class Command
       $ai = $this->ai;
       $chat = "Fitur ini memberikan perintah kepada AI untuk melakukan suatu hal. Adapun command yang sudah ada saat ini adalah translate, learning dan hitung. Untuk menggunakannya dengan mengetikkan : cmd [nama command] [perintah]. Untuk petunjuk gunakan perintah --help";
       $ai->add_chat($chat,2);
-      return true;
+      $chat_en = str_replace(" ","+",$chat);
+      $translate = $this->translate(" ".$chat_en,1);
+      return "0 | 2 | ".$translate;
    }
    public function version(){
       $ai = $this->ai;

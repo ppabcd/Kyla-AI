@@ -1,8 +1,10 @@
 <?php
-require_once("apriori.php");
+//require_once("apriori.php");
 /**
  * AI Class
  */
+//
+
 class AI
 {
    protected $db;
@@ -10,7 +12,7 @@ class AI
    function __construct()
    {
       $this->db = new Mysqli("localhost","root","","ai") or die(mysqli_errno());
-      $this->apriori = new Apriori;
+      //$this->apriori = new Apriori;
       date_default_timezone_set("Asia/Jakarta");
    }
    private function clearStoredResults(){

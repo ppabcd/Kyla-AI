@@ -102,7 +102,7 @@ if(isset($_POST['respon'])){
 
 */
 //$cmd = new Command;
-require_once("./class/Process.php");
+require_once("../class/autoload.php");
 $proses = new Process;
 if(isset($_POST['chat'])){
    if(!empty($_POST['chat'])){
