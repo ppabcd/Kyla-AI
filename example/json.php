@@ -1,4 +1,8 @@
 <?php
+/**
+* @author Reza J. https://www.facebook.com/ppabcd <rezajuliandri20@gmail.com>
+* @license Kyla-AI (c) 2017
+*/
 header('Content-Type: application/json');
 require_once("../class/autoload.php");
 $ai = new AI;

@@ -1,5 +1,8 @@
 <?php
-//require_once("./class/Command.php");
+/**
+* @author Reza J. https://www.facebook.com/ppabcd <rezajuliandri20@gmail.com>
+* @license Kyla-AI (c) 2017
+*/
 /**
  * Process Class
  */

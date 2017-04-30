@@ -1,9 +1,8 @@
 <?php
-/*
-require_once("./class/AI.php");
-require_once("./class/SaferScript.php");
-require_once("./class/Wikipedia.php");
-require_once("./class/Weather.php");
+/**
+* @author Reza J. https://www.facebook.com/ppabcd <rezajuliandri20@gmail.com>
+* @license Kyla-AI (c) 2017
+*/
 /**
  * Command Class
  */
