@@ -116,8 +116,26 @@
       border-radius: 3px;
       padding: 8px;
       outline: none;
-      width: 234px;
+      width: 210px;
    }
+	.voice {
+		width : 30px;
+		height : 30px;
+		border-radius: 50%;
+		text-align: center;
+		background-color: #fff;
+		padding: 8px;
+		outline: none;
+		margin-left: 10px;
+		border : 3px solid #f0f0f0;
+	}
+	.voice.active {
+		transition: border-width 0.1s ease-in-out;
+		border : 3px solid #fc5555;
+		background-position: center;
+		background-repeat: no-repeat;
+
+	}
    input.blue {
       border : 1px solid rgba(0, 175, 244, 0.6) !important;
    }
@@ -211,7 +229,7 @@
 			<p class="chat-feedback">Kyla is typing…</p>
 			<div class="form">
             <fieldset>
-					<input type="text" placeholder="Masukkan pesan…" autofocus id="chating">
+					<input type="text" placeholder="Masukkan pesan…" autofocus id="chating"><button type="button" name="voice" class="voice active" onclick="toggleStartStop()"><img src="https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/256/Microphone_1.png" alt="" style="width : 10x; height : 10px;"></button>
                <input type="text" placeholder="Masukkan jawaban pertanyaan tadi" value="" class="blue" id="jawaban">
 					<input type="hidden" name="kalimat" class="kalimat">
 				</fieldset>
@@ -221,7 +239,44 @@
 	<script src="./jquery.min.js"></script>
 	<script type="text/javascript" src="https://code.responsivevoice.org/responsivevoice.js"></script>
    <script type="text/javascript">
+	//Speech Recognition
+	var recognizing;
+	var end = "";
+	var recognition = new webkitSpeechRecognition();
+	recognition.lang = "id-ID";
+	recognition.continuous = true;
+	reset();
+	recognition.onend = reset();
+
+	recognition.onresult = function (event) {
+		for (var i = event.resultIndex; i < event.results.length; ++i) {
+			if (event.results[i].isFinal) {
+				end += event.results[i][0].transcript;
+			}
+		}
+		if(end != null){
+			$("#chating").val(end);
+		}
+	}
+	function reset(){
+		recognizing = false;
+		end = "";
+		$(".voice").removeClass("active");
+	}
+
+	function toggleStartStop() {
+		if (recognizing) {
+			recognition.stop();
+			reset();
+		} else {
+			recognition.start();
+			recognizing = true;
+			$(".voice").addClass("active");
+		}
+	}
+	//End Speech Recognition
    $(document).ready(function(){
+
       $(".chat-feedback").hide();
       $('.chat-message-counter').hide();
       $("#jawaban").hide();
@@ -287,6 +342,7 @@
                      console.log(data);
                      if(data[1] == "1"){
                         $("#chating").hide();
+								$(".voice").hide();
                         $("#jawaban").show();
                      }
                      $(".kalimat").val(data[0]);
@@ -308,6 +364,7 @@
                   var kalimat = $(".kalimat").val();
                   if(jawaban == "batal"){
                      $("#chating").show();
+							$(".voice").show();
                      $("#jawaban").hide();
                      $("#chating").val('');
                      $("#jawaban").val('');
@@ -324,6 +381,7 @@
                               $(".chat-feedback").hide();
                               $(".kalimat").val('');
                               $("#chating").show();
+										$(".voice").show();
                               $("#jawaban").hide();
                               $("#chating").val('');
                               $("#jawaban").val('');
